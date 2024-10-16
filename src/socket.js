@@ -8,5 +8,5 @@ export const initSocket = async () => {
         transports: ['websocket'],
     };
     
-    return io('https://realtime-collaborative-code-editor-2fkt.onrender.com', options);
+    return io('https://realtime-collaborative-code-editor-2fkt.onrender.com:5001', options);
 };
