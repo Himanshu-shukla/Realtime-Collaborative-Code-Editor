@@ -13,7 +13,7 @@ const ACTIONS = require('./src/actions/Actions');
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: process.env.CLIENT_URL || 'https://realtime-collaborative-code-editor-2fkt.onrender.com', // Replace with your client's URL
+        origin: process.env.CLIENT_URL || 'https://realtime-collaborative-code-editor-az0d.onrender.com', // Replace with your client's URL
         methods: ['GET', 'POST'],
         credentials: true,
     },
@@ -21,7 +21,7 @@ const io = new Server(server, {
 
 // Use CORS middleware
 app.use(cors({
-    origin: ['https://realtime-collaborative-code-editor-2fkt.onrender.com'], // Replace with your client's URL
+    origin: ['https://realtime-collaborative-code-editor-az0d.onrender.com'], // Replace with your client's URL
     credentials: true,
 }));
 
