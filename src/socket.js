@@ -8,5 +8,5 @@ export const initSocket = async () => {
         transports: ['websocket'],
     };
     
-    return io('http://realtime-collaborative-code-editor-az0d.onrender.com:5001', options);
+    return io(process.env.REACT_APP_BACKEND_URL || 'http://localhost:5001', options);
 };

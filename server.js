@@ -4,20 +4,12 @@ const app = express();
 const http = require('http');
 const path = require('path');
 const { Server } = require('socket.io');
-const cors = require('cors');
-const axios = require('axios');
 
 
 const ACTIONS = require('./src/actions/Actions');
 
 const server = http.createServer(app);
-const io = new Server(server, {
-    cors: {
-        origin: process.env.CLIENT_URL || 'https://realtime-collaborative-code-editor-az0d.onrender.com', // Replace with your client's URL
-        methods: ['GET', 'POST'],
-        credentials: true,
-    },
-});
+const io = new Server(server);
 
 
 app.use(express.static('build'));
@@ -82,34 +74,6 @@ app.get('/', (req, res) => {
     const htmlContent = '<h1>Welcome to the code editor server</h1>';
     res.setHeader('Content-Type', 'text/html');
     res.send(htmlContent);
-});
-
-app.post('/compile', async (req, res) => {
-    const { code, lang, input } = req.body;
-
-    try {
-        const options = {
-            method: 'POST',
-            url: 'https://online-code-compiler.p.rapidapi.com/v1/',
-            headers: {
-              'x-rapidapi-key': '936e9ee82fmshb68bf453e860de7p1bef93jsnc55ed21ca742',
-              'x-rapidapi-host': 'online-code-compiler.p.rapidapi.com',
-              'Content-Type': 'application/json'
-            },
-            data: {
-              language: lang ==="clike"? "cpp" : lang,
-              version: 'latest',
-              code: code,
-              input: input
-            }
-        };
-        
-        const response = await axios.request(options);
-        res.status(200).json(response.data);
-    } catch (error) {
-        console.error('Error:', error.response ? error.response.data : error.message);
-        res.status(500).json({ error: 'An error occurred' });
-    }
 });
 
 
