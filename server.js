@@ -4,26 +4,13 @@ const app = express();
 const http = require('http');
 const path = require('path');
 const { Server } = require('socket.io');
-const cors = require('cors');
 const axios = require('axios');
 
 
 const ACTIONS = require('./src/actions/Actions');
 
 const server = http.createServer(app);
-const io = new Server(server, {
-    cors: {
-        origin: process.env.CLIENT_URL || 'https://realtime-collaborative-code-editor-az0d.onrender.com', // Replace with your client's URL
-        methods: ['GET', 'POST'],
-        credentials: true,
-    },
-});
 
-// Use CORS middleware
-app.use(cors({
-    origin: ['https://realtime-collaborative-code-editor-az0d.onrender.com'], // Replace with your client's URL
-    credentials: true,
-}));
 
 app.use(express.static('build'));
 app.use(express.json());
